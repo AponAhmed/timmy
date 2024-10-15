@@ -4,6 +4,10 @@ This project implements a 3D character named Timmy using Three.js. Timmy feature
 
 ![Timmy Character](sc.png)  <!-- Include the image from the root directory -->
 
+## Demo
+
+Check out the live demo of Timmy in action [here](https://timmy-bro.vercel.app/).
+
 ## Features
 
 - **Character Animation**: Timmy can perform multiple animations like idle, walk, greeting, and talking.
