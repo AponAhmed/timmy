@@ -24,7 +24,6 @@ export default class Character {
 
         this.lightSetup();
         this.appendDom();
-
         // Add click event listener
         this.addClickEvent();
     }
@@ -115,7 +114,7 @@ export default class Character {
         });
 
         // Optionally adjust the position to fit the new scale
-        character.position.set(-1, -1.1, -1); // Adjust Y value to move character higher if needed
+        character.position.set(-3, -1.1, -1); // Adjust Y value to move character higher if needed
         // this.character.scale.set(1, 1, 1); // Adjust scale if needed
         // this.character.position.set(0, 0, 0); // Adjust position if needed
 

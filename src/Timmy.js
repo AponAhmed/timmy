@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import Charecter from "./Charecter";
+import Chat from './Chat';
 
 // Animation settings to control how animations behave
 const animationSettings = {
@@ -7,7 +8,7 @@ const animationSettings = {
     idle_n: { repeate: true, transitionDuration: 0.5 },
     idle_s: { repeate: true, transitionDuration: 0.5 },
     walk: { repeate: true, transitionDuration: 0.5 },
-    greeting: { repeate: false, transitionDuration: .2},
+    greeting: { repeate: false, transitionDuration: .2 },
     focus: { repeate: false, transitionDuration: 0.5 },
     ask: { repeate: false, transitionDuration: 0.5 },
     talking1: { repeate: false, transitionDuration: 0.5 },
@@ -25,13 +26,29 @@ export default class Timmy extends Charecter {
         const width = w === 'v' ? window.innerWidth : w;
         const height = h === 'v' ? window.innerHeight : h;
 
-        super(width, height, './models/timmy.glb');
+        super(width, height, '../timmy.glb');
+        this.chat = new Chat();
+        this.chat.setCallbacks({ wait: this.botWait, response: this.BotResponse });
+        this.container.appendChild(this.chat.chatContainer.element);
         this.lastPlayed = ''; // Track the last played animation
     }
 
+    BotResponse = (data) => {
+        setTimeout(() => {
+            this.chat.addMessage(data.response, 'bot');
+            this.playAnimation(this.getRandomAnimation(talkingAnimations));
+        }, 1000);
+    }
+
+    botWait = () => {
+        this.playAnimationsInSequence(['focus']);
+        console.log('waiting for Response');
+    }
+
+
     async init() {
         await this.modelLoad();
-        this.camera.position.set(-1.4, 0.4, 1.5);
+        this.camera.position.set(-2.5, 0.4, 1.5);
         this.createAnimationControls();
 
         // Add listener for when animations finish
@@ -62,16 +79,31 @@ export default class Timmy extends Charecter {
         return idleAnimations.includes(this.lastPlayed);
     }
 
+    addMessageWithAnimation(animationName) {
+        if (animationName === 'greeting') {
+            setTimeout(() => {
+                this.chat.addMessage("Hello there!", "bot");
+            }, 2000)
+        }
+        if (animationName === 'ask') {
+            this.chat.addMessage("How may I help you ?", "bot");
+        }
+        if (animationName === 'yawn') {
+            this.chat.addMessage("Ooo .. Yaaaaawwwwwn ! ", "bot");
+        }
+
+    }
     // Play an animation with its settings
     playAnimation(animationName) {
         if (this.actions[animationName]) {
             const currentAction = this.actions[animationName];
             const animationSetting = animationSettings[animationName] || { repeate: false };
             this.crossFadeTo(currentAction, animationSetting);
+            this.addMessageWithAnimation(animationName);
             this.lastPlayed = animationName; // Update lastPlayed when an animation starts
         } else {
             console.warn(`Animation "${animationName}" not found! Defaulting to idle.`);
-            //this.playRandomIdleAnimation();
+            this.playRandomIdleAnimation();
         }
     }
 
@@ -84,7 +116,7 @@ export default class Timmy extends Charecter {
             currentAction.fadeOut(animationSetting.transitionDuration);
         }
         newAction.loop = THREE.LoopOnce; // Play once
-        newAction.clampWhenFinished = true; // Do  clamp
+        newAction.clampWhenFinished = true; // Do clamp
         // Fade in the new action
         newAction.reset().fadeIn(animationSetting.transitionDuration).play();
         // Set the new action as the active action

@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+
+* {
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   background-image: url('./img/village-scene.jpg');
   background-size: cover;
@@ -5,4 +13,18 @@ body {
   background-repeat: no-repeat;
   height: 100vh;
   overflow: hidden;
+}
+
+
+.message-wrapper {
+  display: flex;
+}
+
+.message-wrapper.user-message {
+  justify-content: flex-end;
+}
+
+.message-wrapper.bot-message>div {
+  background: rgba(113, 215, 16, 0.4) !important;
+  border-radius: 15px 15px 15px 0 !important;
 }
