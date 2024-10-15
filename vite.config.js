@@ -1,8 +1,15 @@
 import { defineConfig } from 'vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
-  build: {
-    outDir: 'public',  // This specifies the output directory for the build
-    emptyOutDir: true  // Optional: Clears the output directory before each build
-  }
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'timmy.glb',  // Source path of the GLB file
+          dest: ''           // Destination folder inside 'dist'
+        }
+      ]
+    })
+  ]
 });

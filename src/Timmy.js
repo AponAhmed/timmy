@@ -26,7 +26,7 @@ export default class Timmy extends Charecter {
         const width = w === 'v' ? window.innerWidth : w;
         const height = h === 'v' ? window.innerHeight : h;
 
-        super(width, height, '../timmy.glb');
+        super(width, height, './timmy.glb');
         this.chat = new Chat();
         this.chat.setCallbacks({ wait: this.botWait, response: this.BotResponse });
         this.container.appendChild(this.chat.chatContainer.element);
