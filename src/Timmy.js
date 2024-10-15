@@ -34,10 +34,18 @@ export default class Timmy extends Charecter {
     }
 
     BotResponse = (data) => {
-        setTimeout(() => {
-            this.chat.addMessage(data.response, 'bot');
-            this.playAnimation(this.getRandomAnimation(talkingAnimations));
-        }, 1000);
+        const animation = data.response;
+        // Check if the response exists in animationSettings
+        if (animation in animationSettings) {
+            // Play the animation using the response key
+            this.playAnimation(animation);
+        } else {
+            setTimeout(() => {
+                this.chat.addMessage(data.response, 'bot');
+                this.playAnimation(this.getRandomAnimation(talkingAnimations));
+            }, 1000);
+        }
+
     }
 
     botWait = () => {
