@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'; // Import the GUI library for animation control
 
 export default class Character {
@@ -12,6 +13,14 @@ export default class Character {
         this.modelPath = modelPath;
 
         this.GlLoader = new GLTFLoader();
+
+        // Initialize DRACOLoader and set the decoder path
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/'); // Set path to DRACO decoder
+        this.GlLoader.setDRACOLoader(dracoLoader); // Attach DRACOLoader to GLTFLoader
+
+
+
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
 
