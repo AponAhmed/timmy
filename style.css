@@ -77,3 +77,10 @@ body {
   background: rgba(113, 215, 16, 0.4) !important;
   border-radius: 15px 15px 15px 0 !important;
 }
+
+
+@media only screen and (max-width: 500px) {
+  .chat-container {
+    width: 227px !important;
+  }
+}

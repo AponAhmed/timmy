@@ -5,7 +5,8 @@ import Timmy from './src/Timmy';
 const getDeviceDimensions = () => {
     const isSmallDevice = window.innerWidth < 800; // Check if the device width is less than 800
     const width = isSmallDevice ? window.innerWidth : 800; // Set width to window width if small device
-    const height = width / 2; // Maintain a 2:1 aspect ratio
+    let height = width / 4 * 3; // Maintain a 2:1 aspect ratio
+    height = height < 400 ? 400 : height;
     return { width, height };
 };
 

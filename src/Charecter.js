@@ -12,7 +12,7 @@ export default class Character {
         this.AssetLoader();
         this.containerSetup(width, height);
         this.modelPath = modelPath;
-
+        this.width = width;
         this.GlLoader = new GLTFLoader();
         // Initialize DRACOLoader and set the decoder path
         const dracoLoader = new DRACOLoader();
@@ -135,8 +135,12 @@ export default class Character {
             }
         });
 
+        let xpos = -3;
+        if (this.width <= 500) {
+            xpos -= 1.5;
+        }
         // Optionally adjust the position to fit the new scale
-        character.position.set(-3, -1.1, -1); // Adjust Y value to move character higher if needed
+        character.position.set(xpos, -1.1, -1); // Adjust Y value to move character higher if needed
         // this.character.scale.set(1, 1, 1); // Adjust scale if needed
         // this.character.position.set(0, 0, 0); // Adjust position if needed
 

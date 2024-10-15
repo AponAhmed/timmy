@@ -25,7 +25,6 @@ export default class Timmy extends Charecter {
     constructor(w = 350, h = 250) {
         const width = w === 'v' ? window.innerWidth : w;
         const height = h === 'v' ? window.innerHeight : h;
-
         super(width, height, './timmy.glb');
         this.chat = new Chat();
         this.chat.setCallbacks({ wait: this.botWait, response: this.BotResponse });
@@ -56,7 +55,11 @@ export default class Timmy extends Charecter {
 
     async init() {
         await this.modelLoad();
-        this.camera.position.set(-2.5, 0.4, 1.5);
+        let camXpos = -2.5;
+        if (this.width <= 500) {
+            camXpos -= 1;
+        }
+        this.camera.position.set(camXpos, 0.4, 1.5);
         this.createAnimationControls();
 
         // Add listener for when animations finish
