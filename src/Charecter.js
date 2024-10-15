@@ -13,7 +13,6 @@ export default class Character {
         this.modelPath = modelPath;
 
         this.GlLoader = new GLTFLoader();
-
         // Initialize DRACOLoader and set the decoder path
         const dracoLoader = new DRACOLoader();
         dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/'); // Set path to DRACO decoder
@@ -152,12 +151,13 @@ export default class Character {
 
     createAnimationControls() {
         const gui = new GUI(); // Create a GUI for animation controls
+        gui.close();
         const animationFolder = gui.addFolder('Animations');
 
         Object.keys(this.actions).forEach((actionName) => {
             animationFolder.add({ play: () => this.playAnimation(actionName) }, 'play').name(actionName);
         });
-        animationFolder.open(); // Open the folder by default
+        animationFolder.close(); // Open the folder by default
     }
 
     playAnimation(animationName) {

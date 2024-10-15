@@ -15,6 +15,9 @@ body {
   overflow: hidden;
 }
 
+.chat-input {
+  outline: none;
+}
 
 .message-wrapper {
   display: flex;
