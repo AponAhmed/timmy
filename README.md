@@ -2,6 +2,8 @@
 
 This project implements a 3D character named Timmy using Three.js. Timmy features various animations, including idle, walking, and greeting, allowing for interactive chat-like behavior.
 
+![Timmy Character](sc.png)  <!-- Include the image from the root directory -->
+
 ## Features
 
 - **Character Animation**: Timmy can perform multiple animations like idle, walk, greeting, and talking.
