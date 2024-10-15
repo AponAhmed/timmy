@@ -6,6 +6,40 @@
   font-style: normal;
 }
 
+.qt-loading {
+  position: relative;
+  width: 20em;
+  height: 20em;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+/* qtload010 */
+#qt-loading-qtload010>div:nth-child(1) {
+  position: relative;
+  width: 20em;
+  height: 20em;
+  border-radius: 50%;
+  background-color: rgb(18, 87, 16);
+  opacity: 0;
+  animation: qt-loadanim004 2s infinite ease-out;
+}
+
+#qt-loading-qtload010>div:nth-child(2) {
+  position: absolute;
+  width: 20em;
+  height: 20em;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background-color: rgb(106, 181, 51);
+  opacity: 0;
+  animation: qt-loadanim004 2s infinite ease-out;
+  animation-delay: 1s;
+}
+
 body {
   background-image: url('./img/village-scene.jpg');
   background-size: cover;
@@ -17,6 +51,18 @@ body {
 
 .chat-input {
   outline: none;
+}
+
+@keyframes qt-loadanim004 {
+  0% {
+    transform: scale(0%, 0%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(100%, 100%);
+    opacity: 0;
+  }
 }
 
 .message-wrapper {

@@ -9,6 +9,7 @@ export default class Character {
         this.character = null;
         this.actions = {};
 
+        this.AssetLoader();
         this.containerSetup(width, height);
         this.modelPath = modelPath;
 
@@ -46,6 +47,18 @@ export default class Character {
             height: ${height}px;
         `;
         document.body.appendChild(this.container);
+    }
+
+    AssetLoader() {
+        this.loaderContainer = document.createElement('div');
+        this.loaderContainer.style.cssText = `
+            position: fixed; left: 0px; bottom: 0px; width: 100%; height: 100%; background: rgba(0,0,0,.2);z-index: 9999;backdrop-filter: blur(10px);display: flex;justify-content: center;align-items: center;
+        `;
+        this.loaderContainer.innerHTML = `<div id="qt-loading-qtload010" class="qt-loading">
+        <div></div>
+        <div></div>
+      </div>`;
+        document.body.appendChild(this.loaderContainer);
     }
 
     appendDom() {
@@ -88,6 +101,7 @@ export default class Character {
                 if (this.model.animations && this.model.animations.length > 0) {
                     this.setupAnimations(this.model.animations);
                 }
+                this.loaderContainer.remove();
             } else {
                 console.error('Failed to load the model.');
             }
